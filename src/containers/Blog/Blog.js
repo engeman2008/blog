@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // import { Route, Link } from "react-router-dom"; nav link provide some styling, the same functionlity as link
-import { Route, NavLink, Switch } from "react-router-dom";
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 
 import './Blog.css';
 import Posts from './Posts/Posts';
 import NewPost from '../Blog/NewPost/NewPost';
-import FullPost from '../Blog/FullPost/FullPost';
 
 class Blog extends Component {
     render() {
@@ -17,7 +16,7 @@ class Blog extends Component {
                         <ul>
                             {/* activeClassName
                         activeStyle */}
-                            <li><NavLink exact to="/" activeClassName='active'>Home</NavLink></li>
+                            <li><NavLink to="/posts" activeClassName='active'>Posts</NavLink></li>
                             <li><NavLink to={{
                                 pathname: '/new-post',
                                 // pathname: this.props.match.url +  '/new-post', //relative path
@@ -35,9 +34,10 @@ class Blog extends Component {
                 <Route path='/' render={() => <h1>Home2</h1>} /> */}
                 {/* the order is important inside switch */}
                 <Switch>
-                    <Route path='/' exact component={Posts} />
-                    <Route path='/new-post' exact component={NewPost} />
-                    <Route path='/:id' exact component={FullPost} />
+                    <Route path='/new-post' component={NewPost} />
+                    <Route path='/posts' component={Posts} />
+                    <Redirect from="/" to="/posts" />
+                    {/* <Route path='/' component={Posts} /> */}
                 </Switch>
             </div>
         );
