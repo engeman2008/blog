@@ -12,7 +12,6 @@ class Posts extends Component {
     }
 
     componentDidMount() {
-        console.log('mmm');
         axios.get('/posts')
             .then(response => {
                 const posts = response.data.slice(0, 4);

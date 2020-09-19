@@ -21,12 +21,16 @@ class NewPost extends Component {
 
         axios.post('/posts', data)
             .then(response => {
-                console.log(response);
-                this.setState({submitted: true});
+                this.props.history.push('/posts'); //push is another way instead of using redirect
+                //push add the route so you can press back button
+                // redirect replace the url
+                //this.props.history.replace('/posts')
+                // replace the route
+                // this.setState({submitted: true});
             });
     }
     componentDidMount() {
-        console.log(this.props);
+        
     }
     render() {
         let redirect = null;
