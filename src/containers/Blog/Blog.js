@@ -4,7 +4,12 @@ import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 
 import './Blog.css';
 import Posts from './Posts/Posts';
-import NewPost from '../Blog/NewPost/NewPost';
+// import NewPost from '../Blog/NewPost/NewPost';
+import asyncComponent from "../../hoc/asyncComponent";
+//use React.lazy in new version
+const asyncNewPost = asyncComponent(() => {
+    return import('../Blog/NewPost/NewPost')
+})
 
 class Blog extends Component {
     state = {
@@ -37,7 +42,9 @@ class Blog extends Component {
                 <Route path='/' render={() => <h1>Home2</h1>} /> */}
                 {/* the order is important inside switch */}
                 <Switch>
-                    {this.state.auth ? <Route path='/new-post' component={NewPost} /> : null}
+                    {/* {this.state.auth ? <Route path='/new-post' component={NewPost} /> : null} */}
+                    {this.state.auth ? <Route path='/new-post' component={asyncNewPost} /> : null}
+
                     <Route path='/posts' component={Posts} />
                     <Route render={() => <h1>Not Found</h1>} />
                     {/* <Redirect from="/" to="/posts" /> */}
